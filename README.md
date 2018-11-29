@@ -1,4 +1,5 @@
 ## GitHub users' App
+[![CircleCI](https://circleci.com/gh/johngorithm/github-ap-with-java.svg?style=svg)](https://circleci.com/gh/johngorithm/github-ap-with-java)  <a href="https://codeclimate.com/github/johngorithm/github-ap-with-java/maintainability"><img src="https://api.codeclimate.com/v1/badges/2ece7f637a5571667e7a/maintainability" /></a>  <a href="https://codeclimate.com/github/johngorithm/github-ap-with-java/test_coverage"><img src="https://api.codeclimate.com/v1/badges/2ece7f637a5571667e7a/test_coverage" /></a>
 
 ## Description
 
