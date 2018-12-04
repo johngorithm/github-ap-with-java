@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">git-hub-users</string>
+    <string name="app_name">Nairobi GitHub Users</string>
+    <string name="userName">Username</string>
+    <string name="ghUser">Johngorithm</string>
 </resources>
