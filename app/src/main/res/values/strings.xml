@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Nairobi GitHub Users</string>
-    <string name="userName">Username</string>
     <string name="ghUser">Johngorithm</string>
     <string name="following">Following</string>
     <string name="following_count">30</string>
@@ -8,4 +7,13 @@
     <string name="followers_count">201</string>
     <string name="full_name">John Obi</string>
     <string name="full_name_field">Name</string>
+    <string name="username">Johngorithm</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_detail_view">DetailViewActivity</string>
+    <string name="username_field">Username</string>
+    <string name="bio">Bio</string>
+    <string name="public_repos">Public Repos</string>
+    <string name="company_field">Company</string>
+    <string name="bio_value">Alex Honeysett is a Brand and Marketing Strategist who partners with CEOs.</string>
+    <string name="public_repo_count">38</string>
 </resources>
