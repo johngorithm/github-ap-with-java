@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jxw.git_hub_users">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,13 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailViewActivity"
+            android:name=".view.DetailViewActivity"
             android:label="@string/title_activity_detail_view"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".view.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jxw.git_hub_users.MainActivity" />
+                android:value="com.jxw.git_hub_users.view.MainActivity" />
         </activity>
     </application>
 

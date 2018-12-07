@@ -5,7 +5,7 @@
     android:id="@+id/user_detail_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailViewActivity">
+    tools:context=".view.DetailViewActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
