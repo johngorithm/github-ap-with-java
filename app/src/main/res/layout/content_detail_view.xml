@@ -141,8 +141,11 @@
                         android:textAlignment="viewEnd"
                         android:layout_gravity="end"
                         android:paddingRight="15dp"
+                        android:paddingLeft="0dp"
                         android:textSize="16sp"
-                        android:text="@string/username" />
+                        android:text="@string/username"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="0dp" />
 
 
                 </LinearLayout> <!-- username -->
@@ -176,8 +179,11 @@
                         android:textAlignment="viewEnd"
                         android:layout_gravity="end"
                         android:paddingRight="15dp"
+                        android:paddingLeft="0dp"
+                        android:paddingStart="0dp"
                         android:textSize="16sp"
-                        android:text="Andela" />
+                        android:text="@string/company_name"
+                        android:paddingEnd="15dp" />
 
 
                 </LinearLayout> <!-- company -->
@@ -199,6 +205,9 @@
                         android:textSize="17sp"
                         android:layout_gravity="start"
                         android:paddingLeft="15dp"
+                        android:paddingStart="15dp"
+                        android:paddingRight="0dp"
+                        android:paddingEnd="0dp"
                         android:text="@string/public_repos" />
 
                     <TextView
@@ -209,6 +218,9 @@
                         android:textAlignment="viewEnd"
                         android:layout_gravity="end"
                         android:paddingRight="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingLeft="0dp"
+                        android:paddingStart="0dp"
                         android:textSize="16sp"
                         android:text="@string/public_repo_count" />
                 </LinearLayout> <!-- repos -->
