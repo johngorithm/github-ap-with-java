@@ -3,6 +3,9 @@ apply from: "$project.rootDir/tools/findbugs.gradle"
 apply from: "$project.rootDir/tools/checkstyle.gradle"
 apply from: "$project.rootDir/tools/pmd.gradle"
 apply from: "$project.rootDir/tools/script-lint.gradle"
+apply from: "$project.rootDir/tools/git-hooks.gradle"
+
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
 
 android {
     compileSdkVersion 28

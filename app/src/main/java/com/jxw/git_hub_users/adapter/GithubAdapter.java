@@ -20,9 +20,9 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.UserViewHolder> {
-    private static final String TAG = "GihubUsersAdapter";
-    private List<GithubUsers> users;
-    private Context context;
+
+    private final List<GithubUsers> users;
+    /* package */ final Context context;
 
     public GithubAdapter(List<GithubUsers> githubUsersList, Context mContext) {
         this.users = githubUsersList;
@@ -35,11 +35,11 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.UserViewHo
         GithubUsers user = users.get(position);
 
         // Set item views based on your views and data model
-        holder.username.setText(users.get(position).getUserName());
+        holder.username.setText(user.getUserName());
 
         Glide.with(context)
                 .asBitmap()
-                .load(users.get(position).getImageUrl())
+                .load(user.getImageUrl())
                 .into(holder.profileImage);
 
         // SET ON CLICK LISTENER
@@ -64,8 +64,7 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.UserViewHo
         View usersView = inflater.inflate(R.layout.list_item_layout, parent, false);
 
         // Return a new holder instance
-        UserViewHolder viewHolder = new UserViewHolder(usersView);
-        return viewHolder;
+        return  new UserViewHolder(usersView);
     }
 
     @Override
