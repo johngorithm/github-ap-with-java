@@ -16,8 +16,8 @@ import retrofit2.Response;
 
 
 public class GithubUsersPresenter {
-    private static final String TAG = "GithubUsersPresenter";
-    private UsersParentView usersView;
+    /* package */ static final String TAG = "GithubUsersPresenter";
+    /* package */ final UsersParentView usersView;
     private GithubService githubService;
 
     public GithubUsersPresenter(UsersParentView view) {
