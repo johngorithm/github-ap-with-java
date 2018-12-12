@@ -1,0 +1,67 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Slack lane set-up"
+  before_all do |lane, options|
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "clean assembleRelease")
+    crashlytics
+  
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Upload APK to Slack channel"
+  private_lane :upload_to_slack do |options|
+    file_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+    file_name = file_path.gsub(/\/.*\//,"")
+    token =  ENV["SLACK_API_TOKEN"]
+    channel = ENV["SLACK_CHANNEL"]
+    sh "echo Uploading " + file_name + " to Slack"
+    sh "curl https://slack.com/api/files.upload -F token=\"" + token + "\" -F channels=\"" + channel + "\" -F title=\"" + file_name + "\" -F filename=\"" + file_name + "\" -F file=@" + file_path
+  end
+
+  lane :slackbuild do
+    gradle(task: "assembleRelease")
+    slack(message: "Build Is Successful")
+    upload_to_slack()
+  end
+
+  after_all do |lane|
+    file_name = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH].gsub(/\/.*\//,"")
+    slack(
+        message: "Successfully deployed the amazing Github Users App! :celebrate:",
+        use_webhook_configured_username_and_icon: true,
+        payload: {
+        # Optional, lets you specify any number of your own Slack attachments.
+        "Build Date" => Time.new.to_s,
+        "APP APK" => file_name,
+        "Built by" => "Johngorithm"
+        }
+    )
+  end
+end
