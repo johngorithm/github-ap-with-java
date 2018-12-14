@@ -1,19 +1,13 @@
 <resources>
     <string name="app_name">Nairobi GitHub Users</string>
     <string name="following">Following</string>
-    <string name="following_count">30</string>
     <string name="followers">Followers</string>
-    <string name="followers_count">201</string>
-    <string name="username">someCoolGuy</string>
     <string name="title_activity_detail_view">User Profile</string>
     <string name="username_field">Username</string>
     <string name="bio">Bio</string>
     <string name="public_repos">Public Repos</string>
     <string name="company_field">Company</string>
-    <string name="bio_value">Alex Honeysett is a Brand and Marketing Strategist who partners with CEOs.</string>
-    <string name="public_repo_count">38</string>
-    <string name="company_name">Andela</string>
+    <string name="share">Share</string>
     <string name="bio_default_text">Not Available</string>
     <string name="company_default_text">None</string>
-    <string name="share">Share</string>
 </resources>

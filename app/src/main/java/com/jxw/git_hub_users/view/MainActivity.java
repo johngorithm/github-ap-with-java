@@ -1,5 +1,6 @@
 package com.jxw.git_hub_users.view;
 
+import android.app.ProgressDialog;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements UsersParentView {
     public List<GithubUsers> ghUsers;
     RecyclerView.LayoutManager mLayoutManager;
     Parcelable recyclerViewParcelable;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -35,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements UsersParentView {
         mRecyclerView = findViewById(R.id.gh_users_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
 
         if (savedInstanceState != null) {
@@ -82,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements UsersParentView {
 
     @Override
     public void displayUsers(List<GithubUsers> githubUsersList) {
+        progressDialog.dismiss();
+
         ghUsers = githubUsersList;
         GithubAdapter adapter = new GithubAdapter(githubUsersList, this);
         // use a linear layout manager

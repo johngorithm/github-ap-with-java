@@ -36,7 +36,6 @@
                     android:id="@+id/user_image"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:src="@mipmap/ic_launcher"
                     app:civ_border_color="#fff"
                     app:civ_border_width="2dp" />
             </LinearLayout> <!---image -->
@@ -72,8 +71,7 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textSize="24sp"
-                        android:textColor="#000"
-                        android:text="@string/following_count"/>
+                        android:textColor="#000"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -98,8 +96,7 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="#000"
-                        android:textSize="24sp"
-                        android:text="@string/followers_count"/>
+                        android:textSize="24sp" />
                 </LinearLayout>
 
             </LinearLayout> <!-- Following Data -->
@@ -144,7 +141,6 @@
                         android:paddingRight="15dp"
                         android:paddingLeft="0dp"
                         android:textSize="16sp"
-                        android:text="@string/username"
                         android:paddingEnd="15dp"
                         android:paddingStart="0dp" />
 
@@ -183,7 +179,6 @@
                         android:paddingLeft="0dp"
                         android:paddingStart="0dp"
                         android:textSize="16sp"
-                        android:text="@string/company_name"
                         android:paddingEnd="15dp" />
 
 
@@ -222,8 +217,7 @@
                         android:paddingEnd="15dp"
                         android:paddingLeft="0dp"
                         android:paddingStart="0dp"
-                        android:textSize="16sp"
-                        android:text="@string/public_repo_count" />
+                        android:textSize="16sp" />
                 </LinearLayout> <!-- repos -->
             </LinearLayout> <!-- user details -->
 
@@ -249,7 +243,6 @@
                     android:padding="10dp"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:text="@string/bio_value"
                     android:textSize="16sp" />
 
             </LinearLayout>

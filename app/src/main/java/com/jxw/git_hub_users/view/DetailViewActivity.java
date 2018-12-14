@@ -1,5 +1,6 @@
 package com.jxw.git_hub_users.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.bumptech.glide.Glide;
 import com.jxw.git_hub_users.R;
@@ -18,8 +20,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailViewActivity extends AppCompatActivity implements UserDetailParentView {
     private static final String TAG = "DetailViewActivity";
-    public static String USER_INFO_KEY = "userData";
+    public static final String USER_INFO_KEY = "userData";
+    public String userName;
     public UserProfile ghUserInfo;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,29 +32,43 @@ public class DetailViewActivity extends AppCompatActivity implements UserDetailP
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Intent incomingIntent = getIntent();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
 
 
         if (savedInstanceState != null) {
             this.ghUserInfo = savedInstanceState.getParcelable(USER_INFO_KEY);
-            this.displayUserProfile(this.ghUserInfo);
-        } else {
-            // HANDLING INCOMING INTENT
-            Intent incomingIntent = getIntent();
-            if (incomingIntent.hasExtra("userName")) {
-                String userName = incomingIntent.getStringExtra("userName");
-
-                UserProfilePresenter profilePresenter = new UserProfilePresenter(this);
-                profilePresenter.getUserProfile(userName);
+            if (this.ghUserInfo != null) {
+                this.displayUserProfile(this.ghUserInfo);
             } else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Invaid Username ID, Please try again", Toast.LENGTH_LONG);
-                toast.show();
+                fetchData(incomingIntent);
             }
+        } else {
+            fetchData(incomingIntent);
         }
 
         Log.i(TAG, "ON-CREATE IS CALLED");
 
 
+    }
+
+    private void fetchData(Intent newIntent) {
+        // HANDLING INCOMING INTENT
+        if (newIntent.hasExtra("userName")) {
+            String userName = newIntent.getStringExtra("userName");
+
+            UserProfilePresenter profilePresenter = new UserProfilePresenter(this);
+            profilePresenter.getUserProfile(userName);
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Invaid Username ID, Please try again", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
 
@@ -63,8 +81,16 @@ public class DetailViewActivity extends AppCompatActivity implements UserDetailP
     }
 
     @Override
+    public void handleError() {
+        progressDialog.dismiss();
+        Toast.makeText(this, "Something Went Wrong. Please, Try Again", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void displayUserProfile(UserProfile userProfile) {
-        ghUserInfo = userProfile;
+        progressDialog.dismiss();
+        this.ghUserInfo = userProfile;
+        this.userName = userProfile.getUserName();
 
         CircleImageView userImageElement = findViewById(R.id.user_image);
         TextView followingCountElement = findViewById(R.id.following_count);
@@ -74,32 +100,52 @@ public class DetailViewActivity extends AppCompatActivity implements UserDetailP
         TextView bioTextElement = findViewById(R.id.bio_text);
         TextView publicReposElement = findViewById(R.id.public_repo_count);
 
-        Glide.with(this)
-                .asBitmap()
+        Glide.with(this).asBitmap()
                 .load(userProfile.getImageUrl())
                 .into(userImageElement);
         followingCountElement.setText(userProfile.getFollowing());
         followersCountElement.setText(userProfile.getFollowers());
         userNameElement.setText(userProfile.getUserName());
+        this.handleCompanyData(companyNameElement);
+        this.handleBioData(bioTextElement);
+        publicReposElement.setText(userProfile.getPublicRepos());
+    }
 
-        if (userProfile.getCompany() == null) {
+    public void handleCompanyData(TextView companyNameElement) {
+        if (ghUserInfo.getCompany() == null) {
             companyNameElement.setText(getString(R.string.company_default_text));
         } else {
-            companyNameElement.setText(userProfile.getCompany());
+            companyNameElement.setText(ghUserInfo.getCompany());
         }
+    }
 
-        if (userProfile.getBio() == null) {
+    public void handleBioData(TextView bioTextElement) {
+        if (ghUserInfo.getCompany() == null) {
             bioTextElement.setText(getString(R.string.bio_default_text));
         } else {
-            bioTextElement.setText(userProfile.getBio());
+            bioTextElement.setText(ghUserInfo.getBio());
         }
-        publicReposElement.setText(userProfile.getPublicRepos());
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (this.userName != null) {
+            String text = "Checkout this awesome developer @" + this.userName + "\nhttps://github.com/"+this.userName;
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, text);
+            startActivity(Intent.createChooser(intent, "Share via"));
+        } else {
+            Toast.makeText(this, "Shareable user data not found", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.sharemenu, menu);
+        Log.d(TAG, "ON-CREATE-OPTION-MENU-WAS-CALLED");
         return super.onCreateOptionsMenu(menu);
     }
 }
