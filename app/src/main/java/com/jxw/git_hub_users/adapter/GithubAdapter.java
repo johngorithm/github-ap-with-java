@@ -32,7 +32,7 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.UserViewHo
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         // Get the data model based on position
-        GithubUsers user = users.get(position);
+        final GithubUsers user = users.get(position);
 
         // Set item views based on your views and data model
         holder.username.setText(user.getUserName());
@@ -42,12 +42,15 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.UserViewHo
                 .load(user.getImageUrl())
                 .into(holder.profileImage);
 
+        final String userName = user.getUserName();
+
         // SET ON CLICK LISTENER
         View.OnClickListener userCardClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent viewDetails = new Intent(context, DetailViewActivity.class);
-                context.startActivity(viewDetails);
+                Intent viewDetailsIntent = new Intent(context, DetailViewActivity.class);
+                viewDetailsIntent.putExtra("userName", userName);
+                context.startActivity(viewDetailsIntent);
             }
         };
 
