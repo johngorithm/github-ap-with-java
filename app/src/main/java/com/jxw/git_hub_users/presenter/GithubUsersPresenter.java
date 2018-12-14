@@ -1,6 +1,5 @@
 package com.jxw.git_hub_users.presenter;
 
-
 import android.util.Log;
 
 import com.jxw.git_hub_users.model.GithubUsers;
