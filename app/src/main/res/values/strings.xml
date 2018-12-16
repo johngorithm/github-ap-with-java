@@ -15,4 +15,5 @@
     <string name="company_name">Andela</string>
     <string name="bio_default_text">Not Available</string>
     <string name="company_default_text">None</string>
+    <string name="share">Share</string>
 </resources>

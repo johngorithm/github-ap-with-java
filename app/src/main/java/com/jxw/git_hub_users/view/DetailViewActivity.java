@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.Menu;
 
 import com.bumptech.glide.Glide;
 import com.jxw.git_hub_users.R;
@@ -94,5 +95,11 @@ public class DetailViewActivity extends AppCompatActivity implements UserDetailP
         }
         publicReposElement.setText(userProfile.getPublicRepos());
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sharemenu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
