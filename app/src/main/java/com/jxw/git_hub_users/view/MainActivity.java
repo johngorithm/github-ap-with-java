@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity implements UsersParentView {
 
     private static final String TAG = "MainActivity";
     private RecyclerView mRecyclerView;
-    public final String USERS_KEY = "users";
-    public final String RECYCLER_VIEW_KEY = "viewKey";
+    public static String USERS_KEY = "users";
+    public static String RECYCLER_VIEW_KEY = "viewKey";
     public List<GithubUsers> ghUsers;
     RecyclerView.LayoutManager mLayoutManager;
     Parcelable recyclerViewParcelable;
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements UsersParentView {
         mRecyclerView = findViewById(R.id.gh_users_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
+
 
         if (savedInstanceState != null) {
             this.ghUsers = savedInstanceState.getParcelableArrayList(USERS_KEY);
