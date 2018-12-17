@@ -36,6 +36,8 @@ public class UserProfilePresenter {
 
                         if (userInfo != null && userInfo.getUserName() != null) {
                             userProfileView.displayUserProfile(userInfo);
+                        } else {
+                            userProfileView.handleError();
                         }
                     }
 

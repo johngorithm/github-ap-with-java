@@ -27,9 +27,6 @@ public class UserProfile implements Parcelable {
     @SerializedName("bio")
     String bio;
 
-    @SerializedName("url")
-    String profileUrl;
-
     public static final Parcelable.Creator<UserProfile> CREATOR = new Creator<UserProfile>() {
         public UserProfile createFromParcel(Parcel in) {
             return new UserProfile(in);
@@ -48,11 +45,10 @@ public class UserProfile implements Parcelable {
         this.company = in.readString();
         this.publicRepos = in.readString();
         this.bio = in.readString();
-        this.profileUrl = in.readString();
     }
 
 
-    public UserProfile(String imageUrl, String followers, String following, String userName, String company, String publicRepos, String bio, String profileUrl) {
+    public UserProfile(String imageUrl, String followers, String following, String userName, String company, String publicRepos, String bio) {
         this.imageUrl = imageUrl;
         this.followers = followers;
         this.following = following;
@@ -60,7 +56,6 @@ public class UserProfile implements Parcelable {
         this.company = company;
         this.publicRepos = publicRepos;
         this.bio = bio;
-        this.profileUrl = profileUrl;
     }
 
 
@@ -92,9 +87,6 @@ public class UserProfile implements Parcelable {
         return bio;
     }
 
-    public String getProfileUrl() {
-        return profileUrl;
-    }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
@@ -124,9 +116,6 @@ public class UserProfile implements Parcelable {
         this.bio = bio;
     }
 
-    public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
-    }
 
     @Override
     public int describeContents() {
@@ -137,7 +126,6 @@ public class UserProfile implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.userName);
         dest.writeString(this.imageUrl);
-        dest.writeString(this.profileUrl);
         dest.writeString(this.followers);
         dest.writeString(this.following);
         dest.writeString(this.bio);
