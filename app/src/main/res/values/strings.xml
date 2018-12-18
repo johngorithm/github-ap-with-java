@@ -10,4 +10,5 @@
     <string name="share">Share</string>
     <string name="bio_default_text">Not Available</string>
     <string name="company_default_text">None</string>
+    <string name="refresh_text">Refresh</string>
 </resources>
