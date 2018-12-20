@@ -7,9 +7,10 @@ public class GithubUsersResponse {
     @SerializedName("items")
     private List<GithubUsers> users;
 
-    GithubUsersResponse(List<GithubUsers> users) {
+    public GithubUsersResponse(List<GithubUsers> users) {
         this.users = users;
     }
+    public GithubUsersResponse() {} //NOPMD
 
     public List<GithubUsers> getUsers() {
         return users;
