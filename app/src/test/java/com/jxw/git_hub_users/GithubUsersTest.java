@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  */
 
 
-public class ExampleUnitTest {
+public class GithubUsersTest {
     private String userName = "Johngorithm";
     private String imageUrl = "http://fake-image-url.com/photo.png";
     private GithubUsers githubUserModel = new GithubUsers(userName, imageUrl);

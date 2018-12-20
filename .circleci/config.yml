@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/java-developers
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: circleci/android:api-28-alpha
     environment:
       JVM_OPTS: -Xmx3200m
       CC_TEST_REPORTER_ID: cd249fe3265b515132cdd1719e7a0761223f6707d2b5c06b36aba246417ad820
@@ -24,10 +24,32 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
+          name: Setup emulator
+          command: sdkmanager "system-images;android-22;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
+      - run:
+          name: Launch emulator
+          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
+          background: true
+      - run:
+          name: Wait emulator
+          command: |
+            circle-android wait-for-boot
+            sleep 30
+            adb shell input keyevent 82
+      - run:
           name: Run Tests
-          command: ./gradlew test
+          command: ./gradlew lint test
       - store_artifacts:
           path: app/build/reports
           destination: reports
       - store_test_results:
           path: app/build/test-results
+      - run:
+          name: Generate Jacoco test report
+          command: ./gradlew clean jacocoTestReport --stacktrace
+      - run:
+          name: Upload test coverage to Code Climate
+          command: |
+            export JACOCO_SOURCE_PATH=app/src/main/java
+            ./cc-test-reporter format-coverage app/build/reports/coverage/debug/report.xml -t jacoco
+            ./cc-test-reporter upload-coverage
