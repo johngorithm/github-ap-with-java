@@ -2,6 +2,7 @@ package com.jxw.git_hub_users.view;
 
 import android.app.ProgressDialog;
 import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,12 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 import com.jxw.git_hub_users.R;
 import com.jxw.git_hub_users.adapter.GithubAdapter;
 import com.jxw.git_hub_users.model.GithubUsers;
 import com.jxw.git_hub_users.presenter.GithubUsersPresenter;
+import com.jxw.git_hub_users.utils.NetworkUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +46,12 @@ public class MainActivity extends AppCompatActivity implements UsersParentView, 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(this, 2);
 
+        // PRESENTER
+        usersPresenter = new GithubUsersPresenter(this);
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
@@ -60,12 +67,34 @@ public class MainActivity extends AppCompatActivity implements UsersParentView, 
             this.ghUsers = savedInstanceState.getParcelableArrayList(USERS_KEY);
             this.displayUsers(ghUsers);
         } else  {
-            // PRESENTER
-            usersPresenter = new GithubUsersPresenter(this);
-            usersPresenter.fetchUsers();
+            loadUsers();
         }
 
         Log.i(TAG, "ON-CREATE IS CALLED");
+    }
+
+    public class clickToRefresh implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            onRefresh();
+        }
+    }
+
+    public void loadUsers() {
+        if (NetworkUtility.isConnected(this)) {
+            usersPresenter.fetchUsers();
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
+            progressDialog.dismiss();
+            showSnackBar();
+        }
+    }
+
+    public void showSnackBar() {
+        Snackbar networkSnackBar = Snackbar.make(findViewById(R.id.coordinate_layout), R.string.network_failure_message, Snackbar.LENGTH_LONG);
+        networkSnackBar.setAction(R.string.click_to_refresh, new clickToRefresh());
+        networkSnackBar.show();
     }
 
     @Override
@@ -78,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements UsersParentView, 
     public boolean onOptionsItemSelected(MenuItem item) {
         if (R.id.menu_refresh == item.getItemId()) {
             swipeRefreshLayout.setRefreshing(true);
-            usersPresenter.fetchUsers();
+            loadUsers();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -121,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements UsersParentView, 
 
         ghUsers = githubUsersList;
         GithubAdapter adapter = new GithubAdapter(githubUsersList, this);
-        // use a linear layout manager
+        // use a grid layout manager
         mRecyclerView.setLayoutManager(mLayoutManager);
         // Adapter will be instantiated and set here
         mRecyclerView.setAdapter(adapter);
@@ -130,6 +159,6 @@ public class MainActivity extends AppCompatActivity implements UsersParentView, 
     @Override
     public void onRefresh() {
         // FETCH USERS
-        usersPresenter.fetchUsers();
+        loadUsers();
     }
 }

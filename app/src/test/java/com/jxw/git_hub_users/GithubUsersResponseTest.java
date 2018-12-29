@@ -1,16 +1,15 @@
 package com.jxw.git_hub_users;
 
-import android.util.Log;
 
 import com.jxw.git_hub_users.model.GithubUsers;
 import com.jxw.git_hub_users.model.GithubUsersResponse;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
-
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class GithubUsersResponseTest {
     private GithubUsersResponse githubUsersResponse = new GithubUsersResponse();
@@ -18,7 +17,6 @@ public class GithubUsersResponseTest {
     private GithubUsers userOne = new GithubUsers("john_doe", "http://images.com/john_doe.png");
     private GithubUsers userTwo = new GithubUsers("will_smith", "http://images.com/will_smith.png");
 
-    private static final String TAG = "GithubUsersResponseTest";
 
 
     @Test

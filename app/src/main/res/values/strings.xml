@@ -11,4 +11,6 @@
     <string name="bio_default_text">Not Available</string>
     <string name="company_default_text">None</string>
     <string name="refresh_text">Refresh</string>
+    <string name="network_failure_message">No Network Connection</string>
+    <string name="click_to_refresh">TRY AGAIN</string>
 </resources>

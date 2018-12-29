@@ -2,11 +2,11 @@ package com.jxw.git_hub_users;
 
 import android.content.pm.ActivityInfo;
 import android.support.test.espresso.action.ViewActions;
-import android.support.test.rule.ActivityTestRule;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
-
 
 import com.jxw.git_hub_users.view.MainActivity;
 
@@ -15,13 +15,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import android.support.test.espresso.contrib.RecyclerViewActions;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
@@ -69,6 +68,7 @@ public class MainActivityTest {
 
     @Test
     public void testClickToRefresh() {
+        sleep();
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(ViewMatchers.withText("Refresh"))
                 .perform(click());
@@ -76,13 +76,14 @@ public class MainActivityTest {
 
     @Test
     public void testLaunchDetailActivityOnItemClick() {
-        onView(withId(R.id.gh_users_recycler_view)).perform(RecyclerViewActions.scrollToPosition(4));
-        onView(withId(R.id.gh_users_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(4, click()));
+        onView(withId(R.id.gh_users_recycler_view)).perform(RecyclerViewActions.scrollToPosition(8));
+        onView(withId(R.id.gh_users_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(8, click()));
+        sleep();
     }
 
     public void sleep() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (Exception e) {
             Log.e(TAG, "Thread Error: " + e.getMessage());
         }

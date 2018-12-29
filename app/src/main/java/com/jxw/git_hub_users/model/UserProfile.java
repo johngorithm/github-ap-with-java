@@ -126,12 +126,12 @@ public class UserProfile implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.userName);
         dest.writeString(this.imageUrl);
         dest.writeString(this.followers);
         dest.writeString(this.following);
-        dest.writeString(this.bio);
+        dest.writeString(this.userName);
         dest.writeString(this.company);
         dest.writeString(this.publicRepos);
+        dest.writeString(this.bio);
     }
 }

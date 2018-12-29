@@ -12,6 +12,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
             '**/*$ViewBinder*.*',
             '**/*/Test*.*',
             'android/**/*.*',
+            'android/*.*',
             'android/**/**/**/*.*',
             'de.hdodenhof.circleimageview/R.class',
             'com.**',
