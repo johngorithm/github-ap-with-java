@@ -65,3 +65,12 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+# Others
+.project
+.settings/
+.vscode/
+
+app/.classpath
+app/.project
+app/.settings/
