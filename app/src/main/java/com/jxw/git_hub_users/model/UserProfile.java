@@ -58,6 +58,8 @@ public class UserProfile implements Parcelable {
         this.bio = bio;
     }
 
+    public UserProfile(){} //NOPMD
+
 
     public String getImageUrl() {
         return imageUrl;

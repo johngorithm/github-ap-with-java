@@ -23,21 +23,16 @@ public class GithubUsers implements Parcelable {
     @SerializedName("avatar_url")
     private String imageUrl;
 
-    @SerializedName("url")
-    private  String profileUrl;
 
-
-    public GithubUsers(String userName, String imageUrl, String profileUrl) {
+    public GithubUsers(String userName, String imageUrl) {
         this.userName = userName;
         this.imageUrl = imageUrl;
-        this.profileUrl = profileUrl;
     }
 
 
     public GithubUsers(Parcel in) {
         this.userName = in.readString();
         this.imageUrl = in.readString();
-        this.profileUrl = in.readString();
     }
 
 
@@ -57,13 +52,7 @@ public class GithubUsers implements Parcelable {
         this.imageUrl = imageUrl;
     }
 
-    public String getProfileUrl() {
-        return profileUrl;
-    }
 
-    public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
-    }
 
     @Override
     public int describeContents() {
@@ -74,7 +63,6 @@ public class GithubUsers implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.userName);
         dest.writeString(this.imageUrl);
-        dest.writeString(this.profileUrl);
     }
 
 }
