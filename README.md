@@ -1,8 +1,8 @@
 
 ## Title: Nairobi Java Developers Github Directory
 
-[![CircleCI](https://circleci.com/gh/johngorithm/github-ap-with-java.svg?style=svg)](https://circleci.com/gh/johngorithm/github-ap-with-java)  <a href="https://codeclimate.com/github/johngorithm/github-ap-with-java/maintainability"><img src="https://api.codeclimate.com/v1/badges/2ece7f637a5571667e7a/maintainability" /></a>
-
+[![CircleCI](https://circleci.com/gh/johngorithm/github-ap-with-java.svg?style=svg)](https://circleci.com/gh/johngorithm/github-ap-with-java)  <a href="https://codeclimate.com/github/johngorithm/github-ap-with-java/maintainability"><img src="https://api.codeclimate.com/v1/badges/2ece7f637a5571667e7a/maintainability" /></a>  [![codecov](https://codecov.io/gh/johngorithm/github-ap-with-java/branch/develop/graph/badge.svg)](https://codecov.io/gh/johngorithm/github-ap-with-java)
+[![Build Status](https://travis-ci.com/johngorithm/github-ap-with-java.svg?branch=develop)](https://travis-ci.com/johngorithm/github-ap-with-java)
 ## Description
 
 This app makes details of Github users from a particular location to be accessible to it's users.

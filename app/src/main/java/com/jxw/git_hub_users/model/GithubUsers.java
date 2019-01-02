@@ -61,8 +61,8 @@ public class GithubUsers implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.userName);
-        dest.writeString(this.imageUrl);
+        dest.writeString(userName);
+        dest.writeString(imageUrl);
     }
 
 }
