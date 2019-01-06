@@ -47,29 +47,20 @@ public class DetailViewActivity extends AppCompatActivity implements UserDetailP
                 R.color.colorPrimary,
                 R.color.colorAccent
         );
-
         incomingIntent = getIntent();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-
-
         if (savedInstanceState != null) {
             this.ghUserInfo = savedInstanceState.getParcelable(USER_INFO_KEY);
-            if (this.ghUserInfo != null) {
-                this.displayUserProfile(this.ghUserInfo);
-            } else {
-                loadProfile(incomingIntent);
-            }
+            this.displayUserProfile(this.ghUserInfo);
         } else {
             loadProfile(incomingIntent);
         }
 
         Log.i(TAG, "ON-CREATE IS CALLED");
-
-
     }
 
     public class ClickToRefresh implements View.OnClickListener{
@@ -118,12 +109,6 @@ public class DetailViewActivity extends AppCompatActivity implements UserDetailP
 
         outState.putParcelable(USER_INFO_KEY, this.ghUserInfo);
         Log.i(TAG, "ON-SAVE-INSTANCE-STATE IS CALLED");
-    }
-
-    @Override
-    public void handleError() {
-        progressDialog.dismiss();
-        Toast.makeText(this, "Something Went Wrong. Please, Try Again", Toast.LENGTH_SHORT).show();
     }
 
     @Override
