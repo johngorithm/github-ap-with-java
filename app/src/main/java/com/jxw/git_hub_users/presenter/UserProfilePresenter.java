@@ -33,12 +33,7 @@ public class UserProfilePresenter {
                     @Override
                     public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
                         UserProfile userInfo = response.body();
-
-                        if (userInfo != null && userInfo.getUserName() != null) {
-                            userProfileView.displayUserProfile(userInfo);
-                        } else {
-                            userProfileView.handleError();
-                        }
+                        userProfileView.displayUserProfile(userInfo);
                     }
 
                     @Override
