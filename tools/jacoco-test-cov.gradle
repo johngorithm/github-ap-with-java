@@ -1,4 +1,4 @@
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'connectedDebugAndroidTest']) {
     reports {
         xml.enabled = true
         html.enabled = true
@@ -12,22 +12,15 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
             '**/*$ViewBinder*.*',
             '**/*/Test*.*',
             'android/**/*.*',
-            'android/*.*',
-            'android/**/**/**/*.*',
-            'de.hdodenhof.circleimageview/R.class',
-            'com.**',
-            '**/*$*$*.*'
+            'de.hdodenhof.circleimageview/R.class'
     ]
-    def debugTree = fileTree(
-            dir: "$project.buildDir/intermediates/app_classes/debug/",
-            excludes: fileFilter
-    )
+    def debugTree = fileTree(dir: "${project.buildDir}/intermediates/javac/debug/compileDebugJavaWithJavac/classes", excludes: fileFilter)
     def mainSrc = "$project.projectDir/app/src/main/java"
 
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])
     executionData = fileTree(dir: project.buildDir, includes: [
             'jacoco/testDebugUnitTest.exec',
-            'outputs/code-coverage/connected/**/*.ec'
+            'outputs/code_coverage/debugAndroidTest/connected/**/*.ec'
     ])
 }
