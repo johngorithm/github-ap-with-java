@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface UsersParentView {
     void displayUsers(List<GithubUsers> usersList);
+    void showErrorMessage(String message);
 }

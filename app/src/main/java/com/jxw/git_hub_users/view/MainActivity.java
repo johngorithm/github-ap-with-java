@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.jxw.git_hub_users.R;
 import com.jxw.git_hub_users.adapter.GithubAdapter;
 import com.jxw.git_hub_users.model.GithubUsers;
 import com.jxw.git_hub_users.presenter.GithubUsersPresenter;
+import com.jxw.git_hub_users.service.GithubService;
 import com.jxw.git_hub_users.utils.NetworkUtility;
 
 import java.util.ArrayList;
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements UsersParentView, 
         mLayoutManager = new GridLayoutManager(this, 2);
 
         // PRESENTER
-        usersPresenter = new GithubUsersPresenter(this);
+        usersPresenter = new GithubUsersPresenter(this, new GithubService());
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
@@ -154,6 +156,11 @@ public class MainActivity extends AppCompatActivity implements UsersParentView, 
         mRecyclerView.setLayoutManager(mLayoutManager);
         // Adapter will be instantiated and set here
         mRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void showErrorMessage(String message){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

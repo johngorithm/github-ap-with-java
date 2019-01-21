@@ -1,7 +1,5 @@
 package com.jxw.git_hub_users.presenter;
 
-import android.util.Log;
-
 import com.jxw.git_hub_users.model.GithubUsers;
 import com.jxw.git_hub_users.model.GithubUsersResponse;
 import com.jxw.git_hub_users.service.GithubService;
@@ -19,11 +17,11 @@ public class GithubUsersPresenter {
     /* package */ final UsersParentView usersView;
     private GithubService githubService;
 
-    public GithubUsersPresenter(UsersParentView view) {
+    public GithubUsersPresenter(UsersParentView view, GithubService githubService) {
         this.usersView = view;
 
         if (this.githubService == null) {
-            this.githubService = new GithubService();
+            this.githubService = githubService;
         }
     }
 
@@ -44,7 +42,7 @@ public class GithubUsersPresenter {
 
                     @Override
                     public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
-                        Log.e(TAG, t.toString());
+                        usersView.showErrorMessage(t.getMessage());
                     }
                 });
 
