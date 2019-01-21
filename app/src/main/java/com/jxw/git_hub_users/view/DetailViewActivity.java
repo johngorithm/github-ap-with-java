@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.jxw.git_hub_users.R;
 import com.jxw.git_hub_users.model.UserProfile;
 import com.jxw.git_hub_users.presenter.UserProfilePresenter;
+import com.jxw.git_hub_users.service.GithubService;
 import com.jxw.git_hub_users.utils.NetworkUtility;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -94,7 +95,7 @@ public class DetailViewActivity extends AppCompatActivity implements UserDetailP
         if (newIntent.hasExtra("userName")) {
             String userName = newIntent.getStringExtra("userName");
 
-            UserProfilePresenter profilePresenter = new UserProfilePresenter(this);
+            UserProfilePresenter profilePresenter = new UserProfilePresenter(this, new GithubService());
             profilePresenter.getUserProfile(userName);
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Invaid Username ID, Please try again", Toast.LENGTH_LONG);

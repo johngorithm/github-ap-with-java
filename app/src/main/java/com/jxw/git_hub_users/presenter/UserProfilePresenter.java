@@ -17,11 +17,11 @@ public class UserProfilePresenter {
     /* package */ final UserDetailParentView userProfileView;
     private GithubService githubService;
 
-    public UserProfilePresenter(UserDetailParentView view) {
+    public UserProfilePresenter(UserDetailParentView view, GithubService githubService) {
         this.userProfileView = view;
 
         if (this.githubService == null) {
-            this.githubService = new GithubService();
+            this.githubService = githubService;
         }
     }
 
